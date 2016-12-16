@@ -11,23 +11,29 @@ Description:
 
 #include "portaudio.h"
 
-/***********
+/*******************
  * Declare
- **********/
+ *******************/
 
-struct subcommand
+struct Subcommand
 {
     const char *name;
     int (*func)(int argc, char *argv[]);
 };
 
-struct stream_format
+struct Stream_format
 {
     const char *name;
     PaSampleFormat macro;
 };
 
-static int test_format(int argc, char *argv[]);
+struct Stream_frame
+{
+    float left_phase;
+    float right_phase;
+};
+
+static int play(int argc, char *argv[]);
 static int traverse(int argc, char *argv[]);
 
 /*******************
@@ -37,12 +43,16 @@ static int traverse(int argc, char *argv[]);
 /* used to store name of this program */
 static char *program_name = 0;
 
-static const struct subcommand subcommands[] = {
-    {"test_format",test_format},
+/* used to flag if current stream is opened as input or output */
+static int is_output_stream = 1;
+
+static const struct Subcommand subcommands[] = {
+    {"play", play},
+    {"record", record},
     {"traverse", traverse}
 };
 
-static const struct stream_format pa_format[] = {
+static const struct Stream_format pa_format[] = {
     {"f32", paFloat32},
     {"i32", paInt32},
     {"i24", paInt24},
@@ -95,6 +105,33 @@ static const char *format_macro_to_name(PaSampleFormat macro)
 }
 
 /*******************************************************
+ * Callback functions
+ *******************************************************/
+static int cb_play(const void *input_buf, void *output_buf,
+                   unsigned long frames_per_buf,
+                   const PaStreamCallbackTimeInfo *time_info,
+                   PaStreamCallbackFlags statusFlags,
+                   void *user_data)
+{
+    static sturct Stream_frame frame = {0, 0};
+    float *out = (float*)output_buf;
+    unsigned i;
+
+    for (i = 0; i < frames_per_buf; ++i)
+    {
+        *out++ = frame.left_phase; // TODO: frame format, interleaved?
+        *out++ = frame.right_phase;
+
+        frame.left_phase += 0.01f;
+        frame.right_phase += 0.03f;
+
+        if (frame.left_phase >= 1.0f) data.left_phase -= 2.0f;
+        if (frame.right_phase >= 1.0f) data.right_phase -= 2.0f;
+    }
+    return 0;
+}
+ 
+/*******************************************************
  * Usage function for every subcommand and the program itself.
  *******************************************************/
 
@@ -117,7 +154,7 @@ static void usage(const char *subcommand)
         printf("-h, --help                  help\n");
     }
 
-    else if (!strcmp(subcommand, "test_format"))
+    else if (!strcmp(subcommand, "play"))
     {
         printf("Usage: %s %s [OPTION] [DEVICE INDEX]\n\n",program_name, subcommand);
         printf("-h, --help                  help\n");
@@ -126,6 +163,20 @@ static void usage(const char *subcommand)
         printf("-l, --latency=#             latency\n");
         printf("-n, --nointerleaved         store different channels' samples in different buffers\n");
         printf("-r, --rate                  sample rate (e.g. 48000, 44100,...)\n");
+        printf("--dry                       not indeed play, just check if the specified stream is supported to play\n");
+        printf("\n\nSupported format includes: f32, i32, i24, i16, i8, u8\n");
+    }
+
+    else if (!strcmp(subcommand, "record"))
+    {
+        printf("Usage: %s %s [OPTION] [DEVICE INDEX]\n\n",program_name, subcommand);
+        printf("-h, --help                  help\n");
+        printf("-c, --channel=#             channel count\n");
+        printf("-f, --format=FORMAT         sample format\n");
+        printf("-l, --latency=#             latency\n");
+        printf("-n, --nointerleaved         store different channels' samples in different buffers\n");
+        printf("-r, --rate                  sample rate (e.g. 48000, 44100,...)\n");
+        printf("--dry                       not indeed record, just check if the specified stream is supported to record\n");
         printf("\n\nSupported format includes: f32, i32, i24, i16, i8, u8\n");
     }
     // no need to check "else" cases, this is guaranteed because it will only be called by corresponding function
@@ -173,8 +224,8 @@ static void do_traverse()
     Pa_Terminate();
 }
 
-static int do_test_format(PaDeviceIndex device_idx, int input_channel, int output_channel, PaTime input_latency, 
-                          PaTime output_latency, const char *format, int is_noninterleaved, double rate)
+static int do_play(PaDeviceIndex device_idx, int input_channel, int output_channel, PaTime input_latency, 
+                   PaTime output_latency, const char *format, int is_noninterleaved, double rate, int is_dry)
 {
     // init lib
     Pa_Initialize();
@@ -201,32 +252,71 @@ static int do_test_format(PaDeviceIndex device_idx, int input_channel, int outpu
     expect_output_param.suggestedLatency = output_latency;
     expect_output_param.hostApiSpecificStreamInfo = NULL;
 
-    // test device parameters
+    // check if parameter given is OK to open stream
     PaError err;
 
-    err = Pa_IsFormatSupported(&expect_input_param, NULL, rate);
-    printf("Open this stream as input with following parameters:\n");
-    printf("* channel       : %d\n", expect_input_param.channelCount);
-    printf("* format        : %s\n", format);
-    printf("* is_interleaved: %s\n", is_noninterleaved?"no":"yes");
-    printf("* latency (sec) : %f\n", expect_input_param.suggestedLatency);
-    printf("* rate (Hz)     : %f\n", rate);
-    if (err == paFormatIsSupported)
-        printf("\nSupported\n");
+    if (is_output_stream)
+    {
+        err = Pa_IsFormatSupported(NULL, &expect_output_param, rate);
+        if (err != paFormatIsSupported)
+        {
+            printf("Open this stream as output with following parameters:\n");
+            printf("* channel       : %d\n", expect_output_param.channelCount);
+            printf("* format        : %s\n", format);
+            printf("* is_interleaved: %s\n", is_noninterleaved?"no":"yes");
+            printf("* latency (sec) : %f\n", expect_output_param.suggestedLatency);
+            printf("* rate (Hz)     : %f\n", rate);
+            printf("\nNot supported: %s\n", Pa_GetErrorText(err));
+            return -1;
+        }
+    }
     else
-        printf("\nNot supported: %s\n", Pa_GetErrorText(err));
+    {
+        if (err != paFormatIsSupported)
+        {
+            err = Pa_IsFormatSupported(&expect_input_param, NULL, rate);
+            printf("Open this stream as input with following parameters:\n");
+            printf("* channel       : %d\n", expect_input_param.channelCount);
+            printf("* format        : %s\n", format);
+            printf("* is_interleaved: %s\n", is_noninterleaved?"no":"yes");
+            printf("* latency (sec) : %f\n", expect_input_param.suggestedLatency);
+            printf("* rate (Hz)     : %f\n", rate);
+            printf("\nNot supported: %s\n", Pa_GetErrorText(err));
+            return -1;
+        }
+    }
 
-    err = Pa_IsFormatSupported(NULL, &expect_output_param, rate);
-    printf("Open this stream as output with following parameters:\n");
-    printf("* channel       : %d\n", expect_output_param.channelCount);
-    printf("* format        : %s\n", format);
-    printf("* is_interleaved: %s\n", is_noninterleaved?"no":"yes");
-    printf("* latency (sec) : %f\n", expect_output_param.suggestedLatency);
-    printf("* rate (Hz)     : %f\n", rate);
-    if (err == paFormatIsSupported)
-        printf("\nSupported\n");
-    else
-        printf("\nNot supported: %s\n", Pa_GetErrorText(err));
+    /* play or record */
+    if (is_dry)
+        return 0;
+
+    // open stream
+    PaStream *stream;
+    err = Pa_OpenStream(&stream,
+                        (is_output_stream? NULL:&expect_input_param),
+                        (is_output_stream? expect_output_param:NULL),
+                        rate,
+                        paFramesPerBufferUnspecified, // Let PA to choose
+                        paNoFlag,
+                        cb_play,
+                        NULL);
+    if (err != paNoError) exit_error(err, "Pa_OpenDefaultStream failed");
+
+    // start stream
+    err = Pa_StartStream(stream);
+    if (err != paNoError) exit_error(err, "Pa_StartStream failed");
+
+    // Sleep some time
+    // TODO: add duration option
+    Pa_Sleep(1000 * 5);
+
+    // stop/abort stream
+    err = Pa_StopStream(stream);
+    if (err != paNoError) exit_error(err, "Pa_StopStream failed");
+
+    // close stream
+    err = Pa_CloseStream(stream);
+    if (err != paNoError) exit_error(err, "Pa_CloseStream failed");
 
     // terminate
     Pa_Terminate();
@@ -274,7 +364,7 @@ static int traverse(int argc, char *argv[])
     return 0;
 }
 
-static int test_format(int argc, char *argv[])
+static int play(int argc, char *argv[])
 {
     
     optind = 1; // reset the index
@@ -288,6 +378,7 @@ static int test_format(int argc, char *argv[])
         {"latency", required_argument, NULL, 'l'},
         {"noninterleaved", no_argument, NULL, 'n'},
         {"rate", required_argument, NULL, 'r'},
+        {"dry", no_argument, NULL, 'z'},
         {0,0,0,0}
     };
 
@@ -346,6 +437,7 @@ static int test_format(int argc, char *argv[])
     // other parameters are not available from device info, set them to some sane defaults
     char *arg_format = "f32";
     int arg_is_noninterleaved = 0; // by default PA pass data as a single buffer with all channels interleaved 
+    int arg_is_dry = 0;
 
     // uninit lib
     Pa_Terminate();
@@ -373,6 +465,9 @@ static int test_format(int argc, char *argv[])
             case 'r':
                 arg_rate = strtod(optarg, NULL);
                 break;
+            case 'z':
+                arg_is_dry = 1;
+                break;
             case 'h':
                 usage(argv[0]);
                 return 0;
@@ -389,8 +484,16 @@ static int test_format(int argc, char *argv[])
     }
 
 
-    return do_test_format(arg_device_idx, arg_input_channel, arg_output_channel, arg_input_latency, arg_output_latency,
-                          arg_format, arg_is_noninterleaved, arg_rate);
+    return do_play(arg_device_idx, arg_input_channel, arg_output_channel, arg_input_latency, arg_output_latency,
+                   arg_format, arg_is_noninterleaved, arg_rate, arg_is_dry);
+}
+
+static int record(int argc, char *argv[])
+{
+    // change global flag to indicate this stream is opended as input
+    is_output_stream = 0;
+
+    return play(argc, argv);
 }
 
 /*************
@@ -399,11 +502,9 @@ static int test_format(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
-    int ret;
+    opterr = 0; // make getopt quiet
 
-    /* array of function names of */
-    optind = 1;
-    opterr = 0;
+    int ret;
 
     /* store program name in global variable */
     program_name = strdup(argv[0]);
@@ -412,7 +513,6 @@ int main(int argc, char *argv[])
     if (argv[1] != '\0' && *argv[1] != '-')
     {
         /* A subcommand is specified */
-
         unsigned index;
         unsigned n_of_subcommands = sizeof(subcommands)/sizeof(subcommands[0]);
         for (index = 0; index < n_of_subcommands; ++index)
