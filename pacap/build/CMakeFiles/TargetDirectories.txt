@@ -1,0 +1,1 @@
+/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/pacap.dir
