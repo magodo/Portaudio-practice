@@ -42,6 +42,16 @@ asm-generic/errno.h
 linux/errno.h
 -
 
+/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/huge_val.h
+endian.h
+-
+
+/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/huge_valf.h
+
+/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/huge_vall.h
+
+/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/inf.h
+
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/libc-lock.h
 pthread.h
 -
@@ -61,6 +71,16 @@ bp-sym.h
 -
 
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/libio-ldbl.h
+
+/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/mathcalls.h
+
+/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/mathdef.h
+
+/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/mathinline.h
+
+/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/nan.h
+endian.h
+-
 
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/predefs.h
 
@@ -220,6 +240,30 @@ bits/libio-ldbl.h
 asm/errno.h
 -
 
+/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/math.h
+features.h
+-
+bits/huge_val.h
+-
+bits/huge_valf.h
+-
+bits/huge_vall.h
+-
+bits/inf.h
+-
+bits/nan.h
+-
+bits/mathdef.h
+-
+bits/mathcalls.h
+-
+bits/mathcalls.h
+-
+bits/mathcalls.h
+-
+bits/mathinline.h
+-
+
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/pthread.h
 features.h
 -
@@ -276,6 +320,14 @@ sys/ucontext.h
 bits/pthreadtypes.h
 -
 bits/sigthread.h
+-
+
+/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/stdint.h
+features.h
+-
+bits/wchar.h
+-
+bits/wordsize.h
 -
 
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/stdio.h
@@ -480,6 +532,10 @@ stdlib.h
 getopt.h
 -
 string.h
+-
+math.h
+-
+stdint.h
 -
 portaudio.h
 /home/uidj4668/code/C/PortAudio/pacap/portaudio.h

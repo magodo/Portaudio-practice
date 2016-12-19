@@ -11,8 +11,16 @@ CMakeFiles/pacap.dir/pacap.c.o
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/byteswap.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/endian.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/errno.h
+ /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/huge_val.h
+ /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/huge_valf.h
+ /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/huge_vall.h
+ /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/inf.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/libc-lock.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/libio-ldbl.h
+ /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/mathcalls.h
+ /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/mathdef.h
+ /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/mathinline.h
+ /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/nan.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/predefs.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/pthreadtypes.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/sched.h
@@ -55,9 +63,11 @@ CMakeFiles/pacap.dir/pacap.c.o
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/gnu/stubs.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/libio.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/linux/errno.h
+ /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/math.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/pthread.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/sched.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/signal.h
+ /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/stdint.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/stdio.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/stdlib.h
  /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/string.h

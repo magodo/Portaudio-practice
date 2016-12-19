@@ -1,13 +1,19 @@
 /*************************************************************************
  Author: Zhaoting Weng
  Created Time: Thu 15 Dec 2016 09:20:30 PM CST
-Description:
+ Description:
+ TODO List:
+    1. Format i24 supporting
+    2. Interleaved supporting
+    3. Capture
  ************************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
 #include <string.h>
+#include <math.h>
+#include <stdint.h>
 
 #include "portaudio.h"
 
@@ -29,11 +35,18 @@ struct Stream_format
 
 struct Stream_frame
 {
-    float left_phase;
-    float right_phase;
+    double left_phase;
+    double right_phase;
+};
+
+struct User_data
+{
+    double step; // calculated step based on current rate and frequency required
+    PaSampleFormat format;
 };
 
 static int play(int argc, char *argv[]);
+static int record(int argc, char *argv[]);
 static int traverse(int argc, char *argv[]);
 
 /*******************
@@ -111,23 +124,83 @@ static int cb_play(const void *input_buf, void *output_buf,
                    unsigned long frames_per_buf,
                    const PaStreamCallbackTimeInfo *time_info,
                    PaStreamCallbackFlags statusFlags,
-                   void *user_data)
+                   void *user_data_)
 {
-    static sturct Stream_frame frame = {0, 0};
-    float *out = (float*)output_buf;
+    static struct Stream_frame frame = {0.0, 0.0}; // remember the phase of each play
+
+    // fetch info from user_data passed in
+    struct User_data *user_data = (struct User_data*)user_data_;
+    double step = user_data->step;
+    PaSampleFormat format = user_data->format;
+
     unsigned i;
 
-    for (i = 0; i < frames_per_buf; ++i)
+    /* open for playing */
+    if (is_output_stream)
     {
-        *out++ = frame.left_phase; // TODO: frame format, interleaved?
-        *out++ = frame.right_phase;
+        /* handle different format */
+        for (i = 0; i < frames_per_buf; ++i)
+        {
+            double val_left = sin(frame.left_phase);
+            double val_right = sin(frame.right_phase);
 
-        frame.left_phase += 0.01f;
-        frame.right_phase += 0.03f;
+            /* handle different format */
+            if (format & paFloat32)
+            {
+                /* `*(type*)p_void++ = value` is illeagle!
+                 *
+                 * Because the "priority" of `(type)` and `++` are the same, the combination direction is right-to-left,
+                 * hence the `++` is evaluated first. However, because `p_void` is a void pointer, in standard C, it is
+                 * illeagle to do arithmatic operation on void pointer. GCC extension support this, however, which results to
+                 * `p_void` incremented by 1 byte. We shouldn't rely on this!
+                 * Therefore, we divide this to 2 steps instead.
+                 */
+                *(float*)output_buf = val_left;
+                output_buf = (float*)output_buf + 1;
+                *(float*)output_buf = val_right;
+                output_buf = (float*)output_buf + 1;
+            }
+            else if (format & paInt32)
+            {
+                *(int32_t*)output_buf = INT32_MAX * val_left;
+                output_buf = (int32_t*)output_buf + 1;
+                *(int32_t*)output_buf = INT32_MAX * val_right;
+                output_buf = (int32_t*)output_buf + 1;
+            }
+            else if (format & paInt16)
+            {
+                *(int16_t*)output_buf = INT16_MAX * val_left;
+                output_buf = (int16_t*)output_buf + 1;
+                *(int16_t*)output_buf = INT16_MAX * val_right;
+                output_buf = (int16_t*)output_buf + 1;
+            }
+            else if (format & paInt8)
+            {
+                *(int8_t*)output_buf = INT8_MAX * val_left;
+                output_buf = (int8_t*)output_buf + 1;
+                *(int8_t*)output_buf = INT8_MAX * val_right;
+                output_buf = (int8_t*)output_buf + 1;
+            }
+            else if (format & paUInt8)
+            {
 
-        if (frame.left_phase >= 1.0f) data.left_phase -= 2.0f;
-        if (frame.right_phase >= 1.0f) data.right_phase -= 2.0f;
+                *(uint8_t*)output_buf = ((UINT8_MAX+1)>>1) + UINT8_MAX * val_left;
+                output_buf = (uint8_t*)output_buf + 1;
+                *(uint8_t*)output_buf = ((UINT8_MAX+1)>>1) + UINT8_MAX * val_right;
+                output_buf = (uint8_t*)output_buf + 1;
+            }
+
+            frame.left_phase += step; // one step forward
+            frame.right_phase += step; // one step forward
+
+            if (frame.left_phase >= 2*M_PI)
+                frame.left_phase -= 2*M_PI;
+            if (frame.right_phase >= 2*M_PI)
+                frame.right_phase -= 2*M_PI;
+        }
     }
+    // TODO: capture
+    
     return 0;
 }
  
@@ -164,7 +237,8 @@ static void usage(const char *subcommand)
         printf("-n, --nointerleaved         store different channels' samples in different buffers\n");
         printf("-r, --rate                  sample rate (e.g. 48000, 44100,...)\n");
         printf("--dry                       not indeed play, just check if the specified stream is supported to play\n");
-        printf("\n\nSupported format includes: f32, i32, i24, i16, i8, u8\n");
+        printf("--freq                      sine wave frequency to play\n");
+        printf("\n\nSupported format includes: f32, i32, i16, i8, u8\n");
     }
 
     else if (!strcmp(subcommand, "record"))
@@ -177,7 +251,7 @@ static void usage(const char *subcommand)
         printf("-n, --nointerleaved         store different channels' samples in different buffers\n");
         printf("-r, --rate                  sample rate (e.g. 48000, 44100,...)\n");
         printf("--dry                       not indeed record, just check if the specified stream is supported to record\n");
-        printf("\n\nSupported format includes: f32, i32, i24, i16, i8, u8\n");
+        printf("\n\nSupported format includes: f32, i32, i16, i8, u8\n");
     }
     // no need to check "else" cases, this is guaranteed because it will only be called by corresponding function
 }
@@ -225,7 +299,8 @@ static void do_traverse()
 }
 
 static int do_play(PaDeviceIndex device_idx, int input_channel, int output_channel, PaTime input_latency, 
-                   PaTime output_latency, const char *format, int is_noninterleaved, double rate, int is_dry)
+                   PaTime output_latency, const char *format, int is_noninterleaved, double rate, int is_dry,
+                   int freq)
 {
     // init lib
     Pa_Initialize();
@@ -257,49 +332,65 @@ static int do_play(PaDeviceIndex device_idx, int input_channel, int output_chann
 
     if (is_output_stream)
     {
+        printf("Open this stream as output with following parameters:\n");
+        printf("* channel       : %d\n", expect_output_param.channelCount);
+        printf("* format        : %s\n", format);
+        printf("* is_interleaved: %s\n", is_noninterleaved?"no":"yes");
+        printf("* latency (sec) : %f\n", expect_output_param.suggestedLatency);
+        printf("* rate (Hz)     : %f\n", rate);
+
         err = Pa_IsFormatSupported(NULL, &expect_output_param, rate);
         if (err != paFormatIsSupported)
         {
-            printf("Open this stream as output with following parameters:\n");
-            printf("* channel       : %d\n", expect_output_param.channelCount);
-            printf("* format        : %s\n", format);
-            printf("* is_interleaved: %s\n", is_noninterleaved?"no":"yes");
-            printf("* latency (sec) : %f\n", expect_output_param.suggestedLatency);
-            printf("* rate (Hz)     : %f\n", rate);
             printf("\nNot supported: %s\n", Pa_GetErrorText(err));
             return -1;
         }
+        else
+            printf("\nSupported\n");
     }
     else
     {
+        printf("Open this stream as input with following parameters:\n");
+        printf("* channel       : %d\n", expect_input_param.channelCount);
+        printf("* format        : %s\n", format);
+        printf("* is_interleaved: %s\n", is_noninterleaved?"no":"yes");
+        printf("* latency (sec) : %f\n", expect_input_param.suggestedLatency);
+        printf("* rate (Hz)     : %f\n", rate);
+
+        err = Pa_IsFormatSupported(NULL, &expect_input_param, rate);
         if (err != paFormatIsSupported)
         {
-            err = Pa_IsFormatSupported(&expect_input_param, NULL, rate);
-            printf("Open this stream as input with following parameters:\n");
-            printf("* channel       : %d\n", expect_input_param.channelCount);
-            printf("* format        : %s\n", format);
-            printf("* is_interleaved: %s\n", is_noninterleaved?"no":"yes");
-            printf("* latency (sec) : %f\n", expect_input_param.suggestedLatency);
-            printf("* rate (Hz)     : %f\n", rate);
             printf("\nNot supported: %s\n", Pa_GetErrorText(err));
             return -1;
         }
+        else
+            printf("\nSupported\n");
     }
 
-    /* play or record */
+    /* return if this is a dry run */
     if (is_dry)
-        return 0;
+    {
+        // terminate
+        Pa_Terminate();
 
+        return 0;
+    }
+
+    // if open to play, calculate the step of sine wave
+    struct User_data user_data;
+    user_data.step = 2*M_PI*freq/rate;
+    user_data.format = sample_format;
+    
     // open stream
     PaStream *stream;
     err = Pa_OpenStream(&stream,
                         (is_output_stream? NULL:&expect_input_param),
-                        (is_output_stream? expect_output_param:NULL),
+                        (is_output_stream? &expect_output_param:NULL),
                         rate,
                         paFramesPerBufferUnspecified, // Let PA to choose
                         paNoFlag,
                         cb_play,
-                        NULL);
+                        &user_data);
     if (err != paNoError) exit_error(err, "Pa_OpenDefaultStream failed");
 
     // start stream
@@ -379,6 +470,7 @@ static int play(int argc, char *argv[])
         {"noninterleaved", no_argument, NULL, 'n'},
         {"rate", required_argument, NULL, 'r'},
         {"dry", no_argument, NULL, 'z'},
+        {"freq", required_argument, NULL, 'y'},
         {0,0,0,0}
     };
 
@@ -419,7 +511,7 @@ static int play(int argc, char *argv[])
     int arg_device_idx = strtol(argv[optind], NULL, 0);
 
 
-    /* Step 2. set expected device parameter from device info */
+    /* Step 2. set expected device parameter to device default parameters */
 
     PaError err;
 
@@ -427,6 +519,11 @@ static int play(int argc, char *argv[])
     Pa_Initialize();
 
     const PaDeviceInfo *deviceInfo = Pa_GetDeviceInfo(arg_device_idx);
+    if (deviceInfo == 0)
+    {
+        printf("Failed to get device info\n");
+        return -1;
+    }
 
     int arg_input_channel = deviceInfo->maxInputChannels;
     int arg_output_channel = deviceInfo->maxOutputChannels;
@@ -437,7 +534,8 @@ static int play(int argc, char *argv[])
     // other parameters are not available from device info, set them to some sane defaults
     char *arg_format = "f32";
     int arg_is_noninterleaved = 0; // by default PA pass data as a single buffer with all channels interleaved 
-    int arg_is_dry = 0;
+    int arg_is_dry = 0; // play/record by default
+    int arg_freq = 1000; // play 1000Hz sine wave by default
 
     // uninit lib
     Pa_Terminate();
@@ -468,6 +566,9 @@ static int play(int argc, char *argv[])
             case 'z':
                 arg_is_dry = 1;
                 break;
+            case 'y':
+                arg_freq = strtol(optarg, NULL, 0);
+                break;
             case 'h':
                 usage(argv[0]);
                 return 0;
@@ -485,7 +586,7 @@ static int play(int argc, char *argv[])
 
 
     return do_play(arg_device_idx, arg_input_channel, arg_output_channel, arg_input_latency, arg_output_latency,
-                   arg_format, arg_is_noninterleaved, arg_rate, arg_is_dry);
+                   arg_format, arg_is_noninterleaved, arg_rate, arg_is_dry, arg_freq);
 }
 
 static int record(int argc, char *argv[])
