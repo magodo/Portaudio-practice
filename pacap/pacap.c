@@ -80,7 +80,13 @@ static const struct Stream_format pa_format[] = {
 
 void exit_error(PaError err, const char *msg)
 {
-    printf("%s: %s\n", msg, Pa_GetErrorText(err));
+    fprintf(stderr, "%s: %s\n", msg, Pa_GetErrorText(err));
+    if (err == paUnanticipatedHostError)
+    {
+		const PaHostErrorInfo *hostErrorInfo = Pa_GetLastHostErrorInfo();
+		fprintf( stderr, "Host API error = #%ld, hostApiType = %d\n", hostErrorInfo->errorCode, hostErrorInfo->hostApiType);
+		fprintf( stderr, "Host API error = %s\n", hostErrorInfo->errorText );
+    }
     exit(-1);
 }
 
@@ -201,7 +207,7 @@ static int cb_play(const void *input_buf, void *output_buf,
     }
     // TODO: capture
     
-    return 0;
+    return paContinue;
 }
  
 /*******************************************************
@@ -238,6 +244,7 @@ static void usage(const char *subcommand)
         printf("-r, --rate                  sample rate (e.g. 48000, 44100,...)\n");
         printf("--dry                       not indeed play, just check if the specified stream is supported to play\n");
         printf("--freq                      sine wave frequency to play\n");
+        printf("--duration                  duration to play(in seconds)");
         printf("\n\nSupported format includes: f32, i32, i16, i8, u8\n");
     }
 
@@ -251,6 +258,7 @@ static void usage(const char *subcommand)
         printf("-n, --nointerleaved         store different channels' samples in different buffers\n");
         printf("-r, --rate                  sample rate (e.g. 48000, 44100,...)\n");
         printf("--dry                       not indeed record, just check if the specified stream is supported to record\n");
+        printf("--duration                  duration to record(in seconds)");
         printf("\n\nSupported format includes: f32, i32, i16, i8, u8\n");
     }
     // no need to check "else" cases, this is guaranteed because it will only be called by corresponding function
@@ -300,7 +308,7 @@ static void do_traverse()
 
 static int do_play(PaDeviceIndex device_idx, int input_channel, int output_channel, PaTime input_latency, 
                    PaTime output_latency, const char *format, int is_noninterleaved, double rate, int is_dry,
-                   int freq)
+                   int freq, unsigned duration)
 {
     // init lib
     Pa_Initialize();
@@ -397,9 +405,16 @@ static int do_play(PaDeviceIndex device_idx, int input_channel, int output_chann
     err = Pa_StartStream(stream);
     if (err != paNoError) exit_error(err, "Pa_StartStream failed");
 
-    // Sleep some time
-    // TODO: add duration option
-    Pa_Sleep(1000 * 5);
+    // Sleep some time or forever
+    if (duration == 0)
+    {
+        while (1)
+        {
+            Pa_Sleep(1000);
+        }
+    }
+    else
+        Pa_Sleep(1000 * duration);
 
     // stop/abort stream
     err = Pa_StopStream(stream);
@@ -471,6 +486,7 @@ static int play(int argc, char *argv[])
         {"rate", required_argument, NULL, 'r'},
         {"dry", no_argument, NULL, 'z'},
         {"freq", required_argument, NULL, 'y'},
+        {"duration", required_argument, NULL, 'x'},
         {0,0,0,0}
     };
 
@@ -536,6 +552,7 @@ static int play(int argc, char *argv[])
     int arg_is_noninterleaved = 0; // by default PA pass data as a single buffer with all channels interleaved 
     int arg_is_dry = 0; // play/record by default
     int arg_freq = 1000; // play 1000Hz sine wave by default
+    unsigned arg_duration = 5; // play/record 5 seconds by default
 
     // uninit lib
     Pa_Terminate();
@@ -569,6 +586,9 @@ static int play(int argc, char *argv[])
             case 'y':
                 arg_freq = strtol(optarg, NULL, 0);
                 break;
+            case 'x':
+                arg_duration = strtol(optarg, NULL, 0);
+                break;
             case 'h':
                 usage(argv[0]);
                 return 0;
@@ -586,7 +606,7 @@ static int play(int argc, char *argv[])
 
 
     return do_play(arg_device_idx, arg_input_channel, arg_output_channel, arg_input_latency, arg_output_latency,
-                   arg_format, arg_is_noninterleaved, arg_rate, arg_is_dry, arg_freq);
+                   arg_format, arg_is_noninterleaved, arg_rate, arg_is_dry, arg_freq, arg_duration);
 }
 
 static int record(int argc, char *argv[])

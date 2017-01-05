@@ -16,12 +16,6 @@ wchar.h
 gconv.h
 -
 
-/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/alloca.h
-features.h
--
-stddef.h
--
-
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/asm-generic/errno-base.h
 
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/asm-generic/errno.h
@@ -126,22 +120,6 @@ lowlevellock.h
 
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/stdio_lim.h
 
-/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/stdlib-ldbl.h
-
-/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/stdlib.h
-
-/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/string.h
-
-/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/string2.h
-endian.h
--
-bits/types.h
--
-stdlib.h
--
-
-/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/string3.h
-
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/sys_errlist.h
 
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/time.h
@@ -159,12 +137,6 @@ bits/typesizes.h
 -
 
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/typesizes.h
-
-/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/waitflags.h
-
-/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/waitstatus.h
-endian.h
--
 
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/bits/wchar-ldbl.h
 
@@ -322,14 +294,6 @@ bits/pthreadtypes.h
 bits/sigthread.h
 -
 
-/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/stdint.h
-features.h
--
-bits/wchar.h
--
-bits/wordsize.h
--
-
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/stdio.h
 features.h
 -
@@ -352,40 +316,6 @@ bits/stdio.h
 bits/stdio2.h
 -
 bits/stdio-ldbl.h
--
-
-/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/stdlib.h
-features.h
--
-stddef.h
--
-bits/waitflags.h
--
-bits/waitstatus.h
--
-xlocale.h
--
-sys/types.h
--
-alloca.h
--
-bits/stdlib.h
--
-bits/stdlib-ldbl.h
--
-
-/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/string.h
-features.h
--
-stddef.h
--
-xlocale.h
--
-bits/string.h
--
-bits/string2.h
--
-bits/string3.h
 -
 
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/sys/cdefs.h
@@ -524,21 +454,13 @@ xlocale.h
 
 /home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include/xlocale.h
 
-/home/uidj4668/code/C/PortAudio/pacap/pacap.c
+/home/uidj4668/code/C/PortAudio/official_examples/paex_write_sine.c
 stdio.h
--
-stdlib.h
--
-getopt.h
--
-string.h
 -
 math.h
 -
-stdint.h
--
 portaudio.h
-/home/uidj4668/code/C/PortAudio/pacap/portaudio.h
+/home/uidj4668/code/C/PortAudio/official_examples/portaudio.h
 
 /usr/local/include/portaudio.h
 

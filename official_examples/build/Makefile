@@ -39,10 +39,10 @@ CMAKE_COMMAND = /home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake
 RM = /home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/uidj4668/code/C/PortAudio/pacap
+CMAKE_SOURCE_DIR = /home/uidj4668/code/C/PortAudio/official_examples
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/uidj4668/code/C/PortAudio/pacap/build
+CMAKE_BINARY_DIR = /home/uidj4668/code/C/PortAudio/official_examples/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,9 +69,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -99,41 +99,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named pacap
+# Target rules for targets named paex_write_sine
 
 # Build rule for target.
-pacap: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 pacap
-.PHONY : pacap
+paex_write_sine: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 paex_write_sine
+.PHONY : paex_write_sine
 
 # fast build rule for target.
-pacap/fast:
-	$(MAKE) -f CMakeFiles/pacap.dir/build.make CMakeFiles/pacap.dir/build
-.PHONY : pacap/fast
+paex_write_sine/fast:
+	$(MAKE) -f CMakeFiles/paex_write_sine.dir/build.make CMakeFiles/paex_write_sine.dir/build
+.PHONY : paex_write_sine/fast
 
-pacap.o: pacap.c.o
-.PHONY : pacap.o
+paex_write_sine.o: paex_write_sine.c.o
+.PHONY : paex_write_sine.o
 
 # target to build an object file
-pacap.c.o:
-	$(MAKE) -f CMakeFiles/pacap.dir/build.make CMakeFiles/pacap.dir/pacap.c.o
-.PHONY : pacap.c.o
+paex_write_sine.c.o:
+	$(MAKE) -f CMakeFiles/paex_write_sine.dir/build.make CMakeFiles/paex_write_sine.dir/paex_write_sine.c.o
+.PHONY : paex_write_sine.c.o
 
-pacap.i: pacap.c.i
-.PHONY : pacap.i
+paex_write_sine.i: paex_write_sine.c.i
+.PHONY : paex_write_sine.i
 
 # target to preprocess a source file
-pacap.c.i:
-	$(MAKE) -f CMakeFiles/pacap.dir/build.make CMakeFiles/pacap.dir/pacap.c.i
-.PHONY : pacap.c.i
+paex_write_sine.c.i:
+	$(MAKE) -f CMakeFiles/paex_write_sine.dir/build.make CMakeFiles/paex_write_sine.dir/paex_write_sine.c.i
+.PHONY : paex_write_sine.c.i
 
-pacap.s: pacap.c.s
-.PHONY : pacap.s
+paex_write_sine.s: paex_write_sine.c.s
+.PHONY : paex_write_sine.s
 
 # target to generate assembly for a file
-pacap.c.s:
-	$(MAKE) -f CMakeFiles/pacap.dir/build.make CMakeFiles/pacap.dir/pacap.c.s
-.PHONY : pacap.c.s
+paex_write_sine.c.s:
+	$(MAKE) -f CMakeFiles/paex_write_sine.dir/build.make CMakeFiles/paex_write_sine.dir/paex_write_sine.c.s
+.PHONY : paex_write_sine.c.s
 
 # Help Target
 help:
@@ -142,11 +142,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... pacap"
+	@echo "... paex_write_sine"
 	@echo "... rebuild_cache"
-	@echo "... pacap.o"
-	@echo "... pacap.i"
-	@echo "... pacap.s"
+	@echo "... paex_write_sine.o"
+	@echo "... paex_write_sine.i"
+	@echo "... paex_write_sine.s"
 .PHONY : help
 
 

@@ -7,27 +7,11 @@ SET(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 SET(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeCCompiler.cmake.in"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c"
   "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeCInformation.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeCXXCompiler.cmake.in"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp"
   "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeCXXInformation.cmake"
   "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeCommonLanguageInclude.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeDetermineCCompiler.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeDetermineCXXCompiler.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeDetermineCompilerABI.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeDetermineCompilerId.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeDetermineSystem.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeFindBinUtils.cmake"
   "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeGenericSystem.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeParseImplicitLinkInfo.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeSystem.cmake.in"
   "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeSystemSpecificInformation.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeTestCCompiler.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeTestCXXCompiler.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeTestCompilerCommon.cmake"
-  "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeUnixFindMake.cmake"
   "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/Compiler/GNU-C.cmake"
   "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/Compiler/GNU-CXX.cmake"
   "/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/Compiler/GNU.cmake"
@@ -55,5 +39,5 @@ SET(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 SET(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/pacap.dir/DependInfo.cmake"
+  "CMakeFiles/paex_write_sine.dir/DependInfo.cmake"
   )

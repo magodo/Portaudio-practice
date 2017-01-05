@@ -10,7 +10,7 @@ The output was:
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
 
-The C compiler identification is GNU, found in "/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CompilerIdC/a.out"
+The C compiler identification is GNU, found in "/home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CompilerIdC/a.out"
 
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
 Compiler: /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/arm-montavista-linux-gnueabi-g++ -tarmv6
@@ -23,30 +23,30 @@ The output was:
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
 
-The CXX compiler identification is GNU, found in "/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CompilerIdCXX/a.out"
+The CXX compiler identification is GNU, found in "/home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CompilerIdCXX/a.out"
 
 Determining if the C compiler works passed with the following output:
-Change Dir: /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp
+Change Dir: /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp
 
 Run Build Command:/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/make "cmTryCompileExec/fast"
 /home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
-make[1]: Entering directory `/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp'
-/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_progress_report /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+make[1]: Entering directory `/home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp'
+/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_progress_report /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp/CMakeFiles 1
 Building C object CMakeFiles/cmTryCompileExec.dir/testCCompiler.c.o
-/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/arm-montavista-linux-gnueabi-gcc    -tarmv6   -isystem/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -g      -o CMakeFiles/cmTryCompileExec.dir/testCCompiler.c.o   -c /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp/testCCompiler.c
+/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/arm-montavista-linux-gnueabi-gcc    -tarmv6   -isystem/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -g      -o CMakeFiles/cmTryCompileExec.dir/testCCompiler.c.o   -c /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp/testCCompiler.c
 Linking C executable cmTryCompileExec
 /home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
 /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/arm-montavista-linux-gnueabi-gcc    -tarmv6   -isystem/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -g      -L/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/lib -Wl,-rpath-link,/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/lib -Wl,-O1  CMakeFiles/cmTryCompileExec.dir/testCCompiler.c.o  -o cmTryCompileExec -rdynamic 
-make[1]: Leaving directory `/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory `/home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp
+Change Dir: /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp
 
 Run Build Command:/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/make "cmTryCompileExec/fast"
 /home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
-make[1]: Entering directory `/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp'
-/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_progress_report /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+make[1]: Entering directory `/home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp'
+/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_progress_report /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp/CMakeFiles 1
 Building C object CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o
 /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/arm-montavista-linux-gnueabi-gcc    -tarmv6   -isystem/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -g      -o CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o   -c /home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c
 Linking C executable cmTryCompileExec
@@ -61,17 +61,17 @@ COMPILER_PATH=/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/
 LIBRARY_PATH=/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/armv6/:/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/../../../../arm-montavista-linux-gnueabi/lib/armv6/:/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/:/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/:/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/../../../../arm-montavista-linux-gnueabi/lib/:/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/lib/:/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/usr/lib/
 COLLECT_GCC_OPTIONS='-tarmv6' '-isystem/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include' '-fexpensive-optimizations' '-fomit-frame-pointer' '-frename-registers' '-O2' '-g' '-v' '-o' 'cmTryCompileExec' '-rdynamic' '-funwind-tables' '-fremove-local-statics'
  /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../libexec/gcc/arm-montavista-linux-gnueabi/4.4.1/collect2 --sysroot=/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6 --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux.so.3 -X -m armelf_linux_eabi -o cmTryCompileExec /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/usr/lib/crt1.o /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/usr/lib/crti.o /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/armv6/crtbegin.o -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/armv6 -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/../../../../arm-montavista-linux-gnueabi/lib/armv6 -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1 -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/../../../../arm-montavista-linux-gnueabi/lib -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/lib -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/usr/lib CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/armv6/crtend.o /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/usr/lib/crtn.o
-make[1]: Leaving directory `/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory `/home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp'
 
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp]
   ignore line: []
   ignore line: [Run Build Command:/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/make "cmTryCompileExec/fast"]
   ignore line: [/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build]
-  ignore line: [make[1]: Entering directory `/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp']
-  ignore line: [/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_progress_report /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [make[1]: Entering directory `/home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp']
+  ignore line: [/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_progress_report /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
   ignore line: [Building C object CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o]
   ignore line: [/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/arm-montavista-linux-gnueabi-gcc    -tarmv6   -isystem/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -g      -o CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o   -c /home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c]
   ignore line: [Linking C executable cmTryCompileExec]
@@ -137,27 +137,27 @@ Parsed C implicit link information from above output:
 
 
 Determining if the CXX compiler works passed with the following output:
-Change Dir: /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp
+Change Dir: /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp
 
 Run Build Command:/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/make "cmTryCompileExec/fast"
 /home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
-make[1]: Entering directory `/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp'
-/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_progress_report /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+make[1]: Entering directory `/home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp'
+/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_progress_report /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp/CMakeFiles 1
 Building CXX object CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o
-/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/arm-montavista-linux-gnueabi-g++    -tarmv6    -isystem/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -g -fpermissive      -o CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o -c /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/arm-montavista-linux-gnueabi-g++    -tarmv6    -isystem/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -g -fpermissive      -o CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o -c /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
 Linking CXX executable cmTryCompileExec
 /home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
 /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/arm-montavista-linux-gnueabi-g++    -tarmv6    -isystem/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -g -fpermissive      -L/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/lib -Wl,-rpath-link,/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/lib -Wl,-O1  CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec -rdynamic 
-make[1]: Leaving directory `/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory `/home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp
+Change Dir: /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp
 
 Run Build Command:/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/make "cmTryCompileExec/fast"
 /home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
-make[1]: Entering directory `/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp'
-/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_progress_report /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+make[1]: Entering directory `/home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp'
+/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_progress_report /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp/CMakeFiles 1
 Building CXX object CMakeFiles/cmTryCompileExec.dir/CMakeCXXCompilerABI.cpp.o
 /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/arm-montavista-linux-gnueabi-g++    -tarmv6    -isystem/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -g -fpermissive      -o CMakeFiles/cmTryCompileExec.dir/CMakeCXXCompilerABI.cpp.o -c /home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp
 Linking CXX executable cmTryCompileExec
@@ -172,17 +172,17 @@ COMPILER_PATH=/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/
 LIBRARY_PATH=/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/armv6/:/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/../../../../arm-montavista-linux-gnueabi/lib/armv6/:/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/:/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/:/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/../../../../arm-montavista-linux-gnueabi/lib/:/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/lib/:/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/usr/lib/
 COLLECT_GCC_OPTIONS='-tarmv6' '-isystem/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include' '-fexpensive-optimizations' '-fomit-frame-pointer' '-frename-registers' '-O2' '-g' '-fpermissive' '-v' '-o' 'cmTryCompileExec' '-rdynamic' '-shared-libgcc' '-funwind-tables' '-fremove-local-statics'
  /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../libexec/gcc/arm-montavista-linux-gnueabi/4.4.1/collect2 --sysroot=/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6 --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux.so.3 -X -m armelf_linux_eabi -o cmTryCompileExec /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/usr/lib/crt1.o /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/usr/lib/crti.o /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/armv6/crtbegin.o -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/armv6 -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/../../../../arm-montavista-linux-gnueabi/lib/armv6 -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1 -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/../../../../arm-montavista-linux-gnueabi/lib -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/lib -L/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/usr/lib CMakeFiles/cmTryCompileExec.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../lib/gcc/arm-montavista-linux-gnueabi/4.4.1/armv6/crtend.o /PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/../arm-montavista-linux-gnueabi/libc/armv6/usr/lib/crtn.o
-make[1]: Leaving directory `/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory `/home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp'
 
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp]
   ignore line: []
   ignore line: [Run Build Command:/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/make "cmTryCompileExec/fast"]
   ignore line: [/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build]
-  ignore line: [make[1]: Entering directory `/home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp']
-  ignore line: [/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_progress_report /home/uidj4668/code/C/PortAudio/pacap/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [make[1]: Entering directory `/home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp']
+  ignore line: [/home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/bin/cmake -E cmake_progress_report /home/uidj4668/code/C/PortAudio/official_examples/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
   ignore line: [Building CXX object CMakeFiles/cmTryCompileExec.dir/CMakeCXXCompilerABI.cpp.o]
   ignore line: [/PROJ/oip/SDK/MG_20150807_M10_6.1.126p/MV_Tools/tools/arm-gnueabi/bin/arm-montavista-linux-gnueabi-g++    -tarmv6    -isystem/home/uidj4668/ADK/imx6x-std-adk/armv7a-mv-linux/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -g -fpermissive      -o CMakeFiles/cmTryCompileExec.dir/CMakeCXXCompilerABI.cpp.o -c /home/uidj4668/ADK/imx6x-std-adk/x86_64-linux/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp]
   ignore line: [Linking CXX executable cmTryCompileExec]
