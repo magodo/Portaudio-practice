@@ -14,6 +14,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdint.h>
+#include <unistd.h>
 
 #include "portaudio.h"
 
@@ -33,16 +34,12 @@ struct Stream_format
     PaSampleFormat macro;
 };
 
-struct Stream_frame
-{
-    double left_phase;
-    double right_phase;
-};
-
 struct User_data
 {
     double step; // calculated step based on current rate and frequency required
     PaSampleFormat format;
+    int input_channel;
+    int output_channel;
 };
 
 static int play(int argc, char *argv[]);
@@ -77,6 +74,11 @@ static const struct Stream_format pa_format[] = {
 /*********************************
  * Utility
  *********************************/
+
+#define IS_OUTPUT_UNDERFLOW(flag) ((paOutputUnderflow&flag))
+#define IS_OUTPUT_OVERFLOW(flag) ((paOutputOverflow&flag))
+#define IS_INPUT_UNDERFLOW(flag) ((paInputUnderflow&flag))
+#define IS_INPUT_OVERFLOW(flag) ((paInputOverflow&flag))
 
 void exit_error(PaError err, const char *msg)
 {
@@ -132,80 +134,85 @@ static int cb_play(const void *input_buf, void *output_buf,
                    PaStreamCallbackFlags statusFlags,
                    void *user_data_)
 {
-    static struct Stream_frame frame = {0.0, 0.0}; // remember the phase of each play
+    static double phase = 0.0;
+    unsigned i, j;
 
     // fetch info from user_data passed in
     struct User_data *user_data = (struct User_data*)user_data_;
     double step = user_data->step;
     PaSampleFormat format = user_data->format;
+    int input_channel = user_data->input_channel;
+    int output_channel = user_data->output_channel;
 
-    unsigned i;
-
-    /* open for playing */
+    /* stream is opened for playing */
     if (is_output_stream)
     {
-        /* handle different format */
+        /* check stream status */
+
+        if (IS_OUTPUT_UNDERFLOW(statusFlags))
+        {
+            fprintf(stderr, "Output underflow!\n");
+        }
+        if (IS_OUTPUT_OVERFLOW(statusFlags))
+        {
+            fprintf(stderr, "Output overflow!\n");
+        }
+
+        /* write frames to the buffer */
         for (i = 0; i < frames_per_buf; ++i)
         {
-            double val_left = sin(frame.left_phase);
-            double val_right = sin(frame.right_phase);
+            double val = sin(phase);
 
-            /* handle different format */
-            if (format & paFloat32)
+            /* each sample(channel) in frame holds same value */
+            for (j = 0; j < output_channel; ++j)
             {
-                /* `*(type*)p_void++ = value` is illeagle!
-                 *
-                 * Because the "priority" of `(type)` and `++` are the same, the combination direction is right-to-left,
-                 * hence the `++` is evaluated first. However, because `p_void` is a void pointer, in standard C, it is
-                 * illeagle to do arithmatic operation on void pointer. GCC extension support this, however, which results to
-                 * `p_void` incremented by 1 byte. We shouldn't rely on this!
-                 * Therefore, we divide this to 2 steps instead.
-                 */
-                *(float*)output_buf = val_left;
-                output_buf = (float*)output_buf + 1;
-                *(float*)output_buf = val_right;
-                output_buf = (float*)output_buf + 1;
-            }
-            else if (format & paInt32)
-            {
-                *(int32_t*)output_buf = INT32_MAX * val_left;
-                output_buf = (int32_t*)output_buf + 1;
-                *(int32_t*)output_buf = INT32_MAX * val_right;
-                output_buf = (int32_t*)output_buf + 1;
-            }
-            else if (format & paInt16)
-            {
-                *(int16_t*)output_buf = INT16_MAX * val_left;
-                output_buf = (int16_t*)output_buf + 1;
-                *(int16_t*)output_buf = INT16_MAX * val_right;
-                output_buf = (int16_t*)output_buf + 1;
-            }
-            else if (format & paInt8)
-            {
-                *(int8_t*)output_buf = INT8_MAX * val_left;
-                output_buf = (int8_t*)output_buf + 1;
-                *(int8_t*)output_buf = INT8_MAX * val_right;
-                output_buf = (int8_t*)output_buf + 1;
-            }
-            else if (format & paUInt8)
-            {
+                /* handle different format */
+                if (format & paFloat32)
+                {
+                    /* `*(type*)p_void++ = value` is illeagle!
+                     *
+                     * Because the "priority" of `(type)` and `++` are the same, the combination direction is right-to-left,
+                     * hence the `++` is evaluated first. However, because `p_void` is a void pointer, in standard C, it is
+                     * illeagle to do arithmatic operation on void pointer. GCC extension support this, however, which results to
+                     * `p_void` incremented by 1 byte. We shouldn't rely on this!
+                     * Therefore, we divide this to 2 steps instead.
+                     */
+                    *(float*)output_buf = val;
+                    output_buf = (float*)output_buf + 1;
+                }
+                else if (format & paInt32)
+                {
+                    *(int32_t*)output_buf = INT32_MAX * val;
+                    output_buf = (int32_t*)output_buf + 1;
+                }
+                else if (format & paInt16)
+                {
+                    *(int16_t*)output_buf = INT16_MAX * val;
+                    output_buf = (int16_t*)output_buf + 1;
+                }
+                else if (format & paInt8)
+                {
+                    *(int8_t*)output_buf = INT8_MAX * val;
+                    output_buf = (int8_t*)output_buf + 1;
+                }
+                else if (format & paUInt8)
+                {
 
-                *(uint8_t*)output_buf = ((UINT8_MAX+1)>>1) + UINT8_MAX * val_left;
-                output_buf = (uint8_t*)output_buf + 1;
-                *(uint8_t*)output_buf = ((UINT8_MAX+1)>>1) + UINT8_MAX * val_right;
-                output_buf = (uint8_t*)output_buf + 1;
+                    *(uint8_t*)output_buf = ((UINT8_MAX+1)>>1) + ((UINT8_MAX+1)>>1) * val;
+                    output_buf = (uint8_t*)output_buf + 1;
+                }
             }
 
-            frame.left_phase += step; // one step forward
-            frame.right_phase += step; // one step forward
+            phase += step; // one step forward
 
-            if (frame.left_phase >= 2*M_PI)
-                frame.left_phase -= 2*M_PI;
-            if (frame.right_phase >= 2*M_PI)
-                frame.right_phase -= 2*M_PI;
+            if (phase >= 2*M_PI)
+                phase -= 2*M_PI;
         }
     }
     // TODO: capture
+    
+    // intentionally make output-only stream underrun
+    //usleep(3 * 1000);
     
     return paContinue;
 }
@@ -388,6 +395,8 @@ static int do_play(PaDeviceIndex device_idx, int input_channel, int output_chann
     struct User_data user_data;
     user_data.step = 2*M_PI*freq/rate;
     user_data.format = sample_format;
+    user_data.input_channel = input_channel;
+    user_data.output_channel = output_channel;
     
     // open stream
     PaStream *stream;
@@ -526,7 +535,6 @@ static int play(int argc, char *argv[])
     }
     int arg_device_idx = strtol(argv[optind], NULL, 0);
 
-
     /* Step 2. set expected device parameter to device default parameters */
 
     PaError err;
@@ -660,7 +668,7 @@ int main(int argc, char *argv[])
         /* No subcommand specified, run program directly*/
         const char *optstring = ":h";
         const struct option longopts[] = {
-            {"help", required_argument, NULL, 'h'},
+            {"help", no_argument, NULL, 'h'},
             {0,0,0,0}
         };
         int val;
